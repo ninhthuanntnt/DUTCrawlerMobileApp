@@ -4,7 +4,7 @@
     "slug": "DUTCrawler",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/dut_crawler.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -16,7 +16,13 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.ntnt.app.dutcrawler",
+      "versionCode": 1
+    },
     "ios": {
+      "bundleIdentifier": "com.ntnt.app.dutcrawler",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "web": {
