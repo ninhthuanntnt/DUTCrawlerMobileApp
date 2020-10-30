@@ -3,7 +3,7 @@ import React from 'react';
 import AppStyles from '../../assets/styles/AppStyles';
 import ScoreScreen from '../screens/ScoreScreen';
 
-class ScoreStack extends React.Component {
+class ScoreStack extends React.PureComponent {
     render() {
         const Stack = createStackNavigator();
 
@@ -15,10 +15,11 @@ class ScoreStack extends React.Component {
                         title: "Điểm",
                         headerTitleStyle: AppStyles.headerBar
                     }}
-                />     
+                />
             </Stack.Navigator>
         );
     }
+    
 }
 
 export default ScoreStack;

@@ -1,6 +1,5 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { connect, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import DUTCrawlerApp from './src/DUTCrawlerApp';
 import store from './src/store';
 

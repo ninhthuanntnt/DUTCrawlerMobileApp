@@ -5,7 +5,7 @@ import { login, resetLoginData } from '../../actions';
 import { connect } from 'react-redux';
 import ProgressLoader from 'rn-progress-loader';
 
-class LoginScreen extends React.Component {
+class LoginScreen extends React.PureComponent {
 
     constructor(props) {
         super(props);

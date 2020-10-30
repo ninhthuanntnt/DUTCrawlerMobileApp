@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { FlatList, Image, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { BackHandler, FlatList, Image, SafeAreaView, StatusBar, StyleSheet, Text, ToastAndroid, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { logout } from '../../actions';
 import CalendarImage from "../../assets/images/Calendar.jpg";
@@ -8,6 +8,29 @@ import NotificationImage from "../../assets/images/notification.png";
 import ScoreImage from "../../assets/images/score.png";
 
 class HomeScreen extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            exitApp: 0
+        }
+        
+        this.props.navigation.addListener('focus', ()=>{
+            BackHandler.addEventListener("hardwareBackPress", this.onHardwareBack);
+        });
+        this.props.navigation.addListener('blur', ()=>{
+            BackHandler.removeEventListener('hardwareBackPress', this.onHardwareBack);
+        });
+    }
+
+    onHardwareBack = ()=>{
+        this.setState({
+            exitApp: this.state.exitApp + 1
+        })
+        this.props.navigation.navigate('HomeStack');
+
+        return true;
+    }
 
     renderItem = ({ item }) => {
         let navigation = this.props.navigation;
@@ -35,6 +58,19 @@ class HomeScreen extends React.Component {
                 <Text style={styles.title}>Đăng nhập</Text>
             </TouchableOpacity>
         )
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+        if(nextState.exitApp === 1){
+            ToastAndroid.show('Nhấn nút Back 2 lần để thoát', ToastAndroid.SHORT);
+            setTimeout(()=>{this.setState({exitApp: 0})}, 500);
+        }else if(nextState.exitApp === 2){
+            BackHandler.exitApp();
+        }
+        if(nextState.exitApp !== this.state.exitApp){
+            return false;
+        }
+        return true;
     }
 
     render() {

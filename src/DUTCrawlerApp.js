@@ -9,7 +9,7 @@ import NotificationStack from './components/stacks/NotificationStack';
 import ScheduleStack from './components/stacks/ScheduleStack';
 import ScoreStack from './components/stacks/ScoreStack';
 
-class DUTCrawlerApp extends React.Component {
+class DUTCrawlerApp extends React.PureComponent {
 
     render() {
 

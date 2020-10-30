@@ -3,7 +3,7 @@ import React from 'react';
 import AppStyles from '../../assets/styles/AppStyles';
 import NotificationScreen from '../screens/NotificationScreen';
 
-class NotificationStack extends React.Component {
+class NotificationStack extends React.PureComponent {
     render() {
         const Stack = createStackNavigator();
 
@@ -18,6 +18,7 @@ class NotificationStack extends React.Component {
             </Stack.Navigator>
         )
     }
+
 }
 
 export default NotificationStack;

@@ -1,10 +1,13 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import HomeScreen from '../screens/HomeScreen';
 import AppStyles from '../../assets/styles/AppStyles';
+import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 
-class HomeStack extends React.Component {
+class HomeStack extends React.PureComponent {
+    constructor(props){
+        super(props);
+    }
     render() {
         const Stack = createStackNavigator();
 
@@ -23,7 +26,7 @@ class HomeStack extends React.Component {
                         title: "Đăng nhập",
                         headerTitleStyle: AppStyles.headerBar
                     }}
-                />        
+                />
             </Stack.Navigator>
         );
     }

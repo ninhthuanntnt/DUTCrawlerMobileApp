@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, FlatList, Linking, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Alert, BackHandler, FlatList, Linking, StatusBar, StyleSheet, Text, View } from 'react-native';
 import HTML from "react-native-render-html";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -17,6 +17,19 @@ class NotificationScreen extends React.Component {
             page: 1,
             isLoading: false
         }
+        let navigation = this.props.navigation;
+        navigation.addListener('focus', ()=>{
+            BackHandler.addEventListener("hardwareBackPress", this.onHardwareBack);
+        });
+        navigation.addListener('blur', ()=>{
+            BackHandler.removeEventListener('hardwareBackPress', this.onHardwareBack);
+        });
+    }
+
+    onHardwareBack = ()=>{
+        this.props.navigation.navigate('HomeStack');
+
+        return true;
     }
 
     openLinkInbrowser = (event, url, attrs) => {
@@ -94,8 +107,8 @@ class NotificationScreen extends React.Component {
             </SafeAreaView>
         );
     }
-
-    componentDidMount() {
+    
+    componentDidMount(){
         this.props.loadNotification(this.state.type, this.state.page);
     }
 }

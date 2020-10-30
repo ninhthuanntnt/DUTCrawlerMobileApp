@@ -1,9 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { BackHandler } from 'react-native';
 import AppStyles from '../../assets/styles/AppStyles';
 import ScheduleScreen from '../screens/ScheduleScreen';
 
-class ScheduleStack extends React.Component {
+class ScheduleStack extends React.PureComponent {
     render() {
         const Stack = createStackNavigator();
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StatusBar } from 'react-native';
+import { Text, View, StatusBar, BackHandler } from 'react-native';
 import { loadSchedule } from '../../actions';
 import { connect } from 'react-redux';
 import * as SecureStore from 'expo-secure-store';
@@ -8,7 +8,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ProgressLoader from 'rn-progress-loader';
 
-class ScheduleScreen extends React.Component {
+class ScheduleScreen extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -16,7 +16,16 @@ class ScheduleScreen extends React.Component {
             curSemester: "1/2020-2021"
         }
 
-        this.props.navigation.addListener('focus', this.componentDidFocus)
+        this.props.navigation.addListener('focus', this.componentDidFocus);
+        this.props.navigation.addListener('blur', ()=>{
+            BackHandler.removeEventListener('hardwareBackPress', this.onHardwareBack);
+        });
+    }
+
+    onHardwareBack = ()=>{
+        this.props.navigation.navigate('HomeStack');
+
+        return true;
     }
 
     loadSchedule = (curSemester) => {
@@ -66,6 +75,7 @@ class ScheduleScreen extends React.Component {
     }
 
     componentDidFocus = () => {
+        BackHandler.addEventListener("hardwareBackPress", this.onHardwareBack);
         this.loadSchedule(this.state.curSemester);
     }
 }
